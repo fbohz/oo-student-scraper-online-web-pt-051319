@@ -23,7 +23,7 @@ class Scraper
  
     student = {}
     links = doc.css("div.social-icon-container a").collect { |i| i.attribute('href').value}
-     # binding.pry
+      binding.pry
     links.each do |link|
       if link.include?("linkedin")
         student[:linkedin] = link
