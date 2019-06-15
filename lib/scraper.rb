@@ -27,7 +27,7 @@ class Scraper
       :github => doc.css("div.social-icon-container a")[2].attribute('href').value, 
       :blog => doc.css("div.social-icon-container a")[3].attribute('href').value,  
       :profile_quote => doc.css(".profile-quote").text, 
-      :bio => doc.css(".description-holder").text.gsub("\n ", "").strip
+      :bio => doc.css("div.bio-content.content-holder div.description-holder p").text
     }
     
     student
