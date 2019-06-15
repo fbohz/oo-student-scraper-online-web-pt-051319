@@ -22,13 +22,21 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
    # binding.pry
     student = {
-      :twitter => doc.css("div.social-icon-container a")[0].attribute('href').value if doc.css("div.social-icon-container a")[0].attribute('href').value
-      :linkedin => doc.css("div.social-icon-container a")[1].attribute('href').value if doc.css("div.social-icon-container a")[1].attribute('href').value 
-      :github => doc.css("div.social-icon-container a")[2].attribute('href').value if doc.css("div.social-icon-container a")[2].attribute('href').value
-      :blog => doc.css("div.social-icon-container a")[3].attribute('href').value if doc.css("div.social-icon-container a")[3].attribute('href').value  
+    case 
+    when doc.css("div.social-icon-container a")[0].attribute('href').value
+      :twitter => doc.css("div.social-icon-container a")[0].attribute('href').value, 
+    when doc.css("div.social-icon-container a")[1].attribute('href').value   
+      :linkedin => doc.css("div.social-icon-container a")[1].attribute('href').value,
+    when doc.css("div.social-icon-container a")[2].attribute('href').value  
+      :github => doc.css("div.social-icon-container a")[2].attribute('href').value, 
+    when doc.css("div.social-icon-container a")[3].attribute('href').value    
+      :blog => doc.css("div.social-icon-container a")[3].attribute('href').value, 
+    when doc.css(".profile-quote").text 
       :profile_quote => doc.css(".profile-quote").text, 
       #a more specific selector was requiring nesting down css
-      :bio => doc.css("div.bio-content.content-holder div.description-holder p" ).text if doc.css("div.bio-content.content-holder div.description-holder p" )
+    when doc.css("div.bio-content.content-holder div.description-holder p" )  
+      :bio => doc.css("div.bio-content.content-holder div.description-holder p" ).text 
+    end 
     }
     
     student
