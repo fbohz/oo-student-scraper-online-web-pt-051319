@@ -22,7 +22,7 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
  
     student = {}
-    #iterates over the a links then collects all a that have value
+    #iterates over the a links then collects all a with their values
     links = doc.css("div.social-icon-container a").collect { |a| a.attribute('href').value}
     links.each do |link|
       if link.include?("linkedin")
