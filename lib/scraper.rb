@@ -22,8 +22,8 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
    # binding.pry
     student = {
-      :twitter => doc.css("div.social-icon-container a")[0].attribute('href').value,
-      :linkedin => doc.css("div.social-icon-container a")[1].attribute('href').value, 
+      :twitter => doc.css("div.social-icon-container a")[0].attribute('href').value if doc.css("div.social-icon-container a")[0].attribute('href').value ,
+      :linkedin => doc.css("div.social-icon-container a")[1].attribute('href').value if doc.css("div.social-icon-container a")[1].attribute('href').value, 
       :github => doc.css("div.social-icon-container a")[2].attribute('href').value, 
       :blog => doc.css("div.social-icon-container a")[3].attribute('href').value,  
       :profile_quote => doc.css(".profile-quote").text, 
