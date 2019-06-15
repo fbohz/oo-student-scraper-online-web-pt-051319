@@ -31,12 +31,13 @@ class Scraper
       student[:github] = doc.css("div.social-icon-container a")[2].attribute('href').value
     when doc.css("div.social-icon-container a")[3].attribute('href').value    
       student[:blog] = doc.css("div.social-icon-container a")[3].attribute('href').value
-    when doc.css(".profile-quote").text 
-      student[:profile_quote] = doc.css(".profile-quote").text
-      #a more specific selector was requiring nesting down css
-    when doc.css("div.bio-content.content-holder div.description-holder p" )  
-      student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
+    # when doc.css(".profile-quote").text 
+    #   student[:profile_quote] = doc.css(".profile-quote").text
+    #   #a more specific selector was requiring nesting down css
+    # when doc.css("div.bio-content.content-holder div.description-holder p" )  
+    #   student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
     end 
+    student[:profile_quote] = doc.css(".profile-quote").text
     student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
     
     student
