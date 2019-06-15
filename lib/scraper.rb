@@ -22,21 +22,18 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
   # binding.pry
     student = {}
-    case doc
-    when doc.css("div.social-icon-container a")[0].attribute('href').value
-      student[:twitter] = doc.css("div.social-icon-container a")[0].attribute('href').value
-    when doc.css("div.social-icon-container a")[1].attribute('href').value   
-      student[:linkedin] = doc.css("div.social-icon-container a")[1].attribute('href').value
-    when doc.css("div.social-icon-container a")[2].attribute('href').value  
-      student[:github] = doc.css("div.social-icon-container a")[2].attribute('href').value
-    when doc.css("div.social-icon-container a")[3].attribute('href').value    
-      student[:blog] = doc.css("div.social-icon-container a")[3].attribute('href').value
-    # when doc.css(".profile-quote").text 
-    #   student[:profile_quote] = doc.css(".profile-quote").text
-    #   #a more specific selector was requiring nesting down css
-    # when doc.css("div.bio-content.content-holder div.description-holder p" )  
-    #   student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
-    end 
+    links = doc.css(".social-icon-container").children.css("a").map { |el| el.attribute('href').value}
+    links.each do |link|
+      if link.include?("linkedin")
+        student[:linkedin] = link
+      elsif link.include?("github")
+        student[:github] = link
+      elsif link.include?("twitter")
+        student[:twitter] = link
+      else
+        student[:blog] = link
+      end
+    end
     student[:profile_quote] = doc.css(".profile-quote").text
     student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
     
