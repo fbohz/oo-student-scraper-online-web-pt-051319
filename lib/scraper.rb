@@ -22,7 +22,7 @@ class Scraper
     doc = Nokogiri::HTML(open(profile_url))
    # binding.pry
     student = {}
-    case doc
+    case 
     when doc.css("div.social-icon-container a")[0].attribute('href').value
       student[:twitter] = doc.css("div.social-icon-container a")[0].attribute('href').value
     when doc.css("div.social-icon-container a")[1].attribute('href').value   
