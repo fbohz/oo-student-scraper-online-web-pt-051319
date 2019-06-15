@@ -34,9 +34,10 @@ class Scraper
     when doc.css(".profile-quote").text 
       student[:profile_quote] = doc.css(".profile-quote").text
       #a more specific selector was requiring nesting down css
-    else
+    when doc.css("div.bio-content.content-holder div.description-holder p" )  
       student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
     end 
+    student[:bio] = doc.css("div.bio-content.content-holder div.description-holder p" ).text 
     
     student
   end
