@@ -24,6 +24,7 @@ class Scraper
     student = {}
     #iterates over the a links then collects all a with their values
     links = doc.css("div.social-icon-container a").collect { |a| a.attribute('href').value}
+    #iterates over the links and checks if there's a needed value if it does then it assigns it to hash.
     links.each do |link|
       if link.include?("linkedin")
         student[:linkedin] = link
